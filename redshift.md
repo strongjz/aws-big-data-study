@@ -183,8 +183,9 @@
   Snapshots can be kept up to 31 days, default 1 day. Taken every 8 hours. You can exclude tables from snapshots in the create table. You can snapshot into another region. KMS can be used to encrypt. You can restore a single table.
   
   
-  ##### Security
-  Require ssl. Enable encryption in transit and at rest. Use views to limit access to data. Obvious things.
+##### Security
+
+Require ssl. Enable encryption in transit and at rest. Use views to limit access to data. Obvious things.
 
 
 ### Blogs 

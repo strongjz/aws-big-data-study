@@ -20,7 +20,7 @@ Master, core and task nodes, each in instance groups. Up to 50 instance groups.
 * EMRFS consistent view
 
 
-###### Storage and Compression
+##### Storage and Compression
 
 HDFS is automatically split into chunks by Hadoop. If on s3, hadoop will split the data by reading files in multiple http range requests. Ebs volumes do not persist when used with EMR clusters.
 
@@ -60,13 +60,13 @@ Basic options are: Core Hadoop, HBase, Presto and Spark. Deploys to default vpc 
 
 Advanced options: Older releases are available and can cherry pick applications. Can edit config. Can add steps now or later. Can select vpc / az. If running into private subnet, you’ll need to create vpc or endpoint. Can request spot and setup autoscaling. Always tag with the EMR tools or they won’t roll back to the EMR cluster. Can also set encryption and IAM / key options. Security groups get set for master and core/task.
 
-###### MapReduce
+##### MapReduce
 
 * Batch oriented
 * M3 or M4 instance types
 * Scale horizontally
 
-###### Provisioning
+##### Provisioning
 
 * Master node
     * clusters < 50 nodes use m3.xlarge or m4.xlarge
@@ -85,29 +85,31 @@ HDFS capacity calculation: total storage / replication factor = hdfs capacity
 
 
 
-###### Monitoring
+##### Monitoring
 * Use cloudwatch for events
 * Metrics are updated every 5 mins, which is not configurable
 * Metrics are archived for 2 weeks, no charge for them
 * Can use native application web interfaces
 * Use ganglia, open source monitoring tool, runs on master node
 
-###### Resizing clusters
+##### Resizing clusters
 * Manually:
     * done with api, cli or console
     * Size down can be done on instance hour or task complete
-    * When resizing core nodes, you cannot size down below the requirements for the replication factor. You can change in hdfs-site.xml and restart the NameNode daemon.
+    * When resizing core nodes, you cannot size down below the requirements for the replication factor. 
+    You can change in hdfs-site.xml and restart the NameNode daemon.
 
 * Autoscaling:
     * Can be based on metrics
     * Must add autoscaling role on cluster creation or you cannot use autoscaling
    
-###### Security
+##### Security
 
-Security groups - you can use your own to isolate EMR clusters. Can also add additional groups to allow ssh, etc. IAM Roles - can use custom roles
+Security groups - you can use your own to isolate EMR clusters. Can also add additional groups to allow ssh, etc. 
+IAM Roles - can use custom roles
 
 
-###### Transient vs Long-running Clusters
+##### Transient vs Long-running Clusters
 	
 * Long Running
     * keeps data on core nodes
@@ -153,7 +155,7 @@ Security groups - you can use your own to isolate EMR clusters. Can also add add
 ##### HDFS EMFS
 
 * A Distributed file systems
-* Allows simulationous access to data 
+* Allows simultaneous access to data 
 * Stores data in blocks
 * Single Global namespace maintained by the Master node
 
@@ -170,7 +172,11 @@ Security groups - you can use your own to isolate EMR clusters. Can also add add
 * Cloudwatch is used to monitor the cluster
 
 ##### Hive
-Data warehouse built on hadoop, uses a sql-like interface (HiveQL) to summarize, query and analyze very large data sets. Provides a high level language interface to mapreduce. Differences between Apache Hive and Hive on EMR, Hive on EMR has native s3 and Dynamo integration, kinesis streams can be used by pushing to s3 first. Supports partitioning on s3. You can use the EMR DynamoDB connector to:
+Data warehouse built on hadoop, uses a sql-like interface (HiveQL) to summarize, query and analyze very large data sets. 
+Provides a high level language interface to mapreduce. Differences between Apache Hive and Hive on EMR, Hive on EMR has 
+native s3 and Dynamo integration, kinesis streams can be used by pushing to s3 first. Supports partitioning on s3. 
+
+You can use the EMR DynamoDB connector to:
 
 * Join hive and Dynamo tables
 * Query data in Dynamo
@@ -204,18 +210,113 @@ Data warehouse built on hadoop, uses a sql-like interface (HiveQL) to summarize,
 
 ##### Hbase
 
+Open source NoSQL database
+
+Massively scalable distributed big data store. Non-relational, versioned database which runs on top of s3 using EMRFS or HDFS. Built for random, strictly consistent realtime access for tables with billions of rows and millions of columns. Integrates with Hadoops, Hive and Pheonix.
+
+Use cases:
+* adtech, content, FINRA
+* Large amounts of data: 100s of GBs to PBs.
+* high write and update i/o.
+* Can use NoSQL and need flexible schema.
+* Fast access to random and real-time.
+* Fault-tolerance in non-relational environment
+
+Limitations
+* No transactions
+* Not relational 
+* Small amount of data
+
+Can connect hive to hbase via zookeeper.
+
+
 ##### Presto
 
+* Open source in memory distributed fast SQL query engine
+* Run interactive analytic queries against a variety of data sources with dize ranging from GB to PB
+
+* Query different types of data sources from relational databases, NoSQL databases, frameworks like Hive to stream
+processing platforms like Kakfa
+
+* Connectors
+    * cassandra
+    * hive 
+    * kafka
+    * mongodb
+    * mysql
+    * postgresl
+    * redis
+
+* High concurrency, run 1000s of queries per day 
+* In memory processing helps avoid unnecessary IO leading to low latency
+* Does not need separate processing layer like hive does
+
+
 ##### Spark
+
+Fast in memory query engine
+
+Use Cases
+
+* Interactive analytics
+* Faster than hive
+* flex in terms of language, scala, python etc
+* run queries against live streams
+* stream processing  
+    * disparate dat sources
+    * data in small sizes
+* Machine learning
+    * repeated queries at scale against data set    
+    * time machine learning alg
+    * MLib 
+* Data integration
+    * ETL
+    * Reduc time and cost 
+  
+When not to use Spark
+  
+* Not a database
+* not designed for OLTP
+* Not for batch processing
+* Multiuser requests
+
+Run ETL in Spark and move the data to a typical reporting database
+
+ Components
+
+* Spark Core - General execution engine 
+    * SQL
+    * Streaming
+    * MLib
+    * GraphX
+* Standalone Scheduler
+* YARN
+* Mesos
+
+
+Data APIs:
+* Resilient Distributed Datasets (RDDs): logical collection of data partitioned across machines
+* DataSet: distributed collection of data
+* DataFrame: DataSet organized into named columns
+
+Streaming
+
+* DStreams (Discretized Streams)
+* Abstraction of continuous streaming data
+* Created from input data sources like kinesis streams
+* Are a collection of RDDs
+* Transformations are applied to RDDs
+* Published to HDFS, databases or dashboards
+
 
 ##### HCatalog
 
 Tools to access Hive metastore tables.
 
-
 ##### Glue
 
-Managed ETL (spark) service to categorize, clean and enrich data. Can move between data stores, can be used as the metadata catalog. Serverless. Can discover and correlate data across multiple datastores. 
+Managed ETL (spark) service to categorize, clean and enrich data. Can move between data stores, can be used 
+as the metadata catalog. Serverless. Can discover and correlate data across multiple datastores. 
 
 
 ### Blogs 
@@ -307,6 +408,4 @@ AWS Labs
 https://github.com/awslabs/emr-dynamodb-connector
 
 
-Redshift Data Source for Apache Spark
-
-https://github.com/databricks/spark-redshift
+[Redshift Data Source for Apache Spark](https://github.com/databricks/spark-redshift)

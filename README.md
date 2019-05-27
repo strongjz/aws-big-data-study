@@ -97,6 +97,12 @@ metadata, etc.
 
 ### Books 
 
+Big Data Analytics with Hadoop 3 by Sridhar Alla
+
+Implementing AWS: Design, Build, and Manage your Infrastructure by Yohan Wadia; Lucas Chan; Udita Gupta; Rowan Udell
+
+Learning Big Data with Amazon Elastic MapReduce by Vijay Rayapati; Amarkant Singh
+
 ### White Papers
 
 * [Big Data Analytics Options on AWS](https://d1.awsstatic.com/whitepapers/Big_Data_Analytics_Options_on_AWS.pdf)

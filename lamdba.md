@@ -1,4 +1,17 @@
-# Service Name
+# Lambda
+
+Receives two json encoded objects on invoke:
+ * Context
+ * Methods and Attributes
+ * Event
+ * One or more records
+ 
+Limitations
+ * 512MB /tmp ephemeral disk
+ * 1024 threads max
+ * 300 second execution time
+ 
+Redshift Database Loader (pre-loaded function) example will push data from s3 on trigger, ETL and load to redshift
 
 ### Blogs 
 

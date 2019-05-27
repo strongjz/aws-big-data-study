@@ -4,6 +4,20 @@
 
 #### Data sources
 
+* Redshift
+* Aurora
+* Athena
+* RDS
+    * Maria 10.0 or later
+    * SQL Server 2012 or later
+    * Mysql 5.1 or later
+    * Postgres 9.3.1 or later
+* S3 files
+    * Excel 
+    * Csv / tsv
+    * Clf and elf
+* Salesforce 
+
 #### Visualization Type
 
 * Relationships
