@@ -1,5 +1,5 @@
 
-[Data was gather from this White paper - Big Data Analytics Options on AWS](https://d0.awsstatic.com/whitepapers/Big_Data_Analytics_Options_on_AWS.pdf)
+[Data was gathered from this White paper - Big Data Analytics Options on AWS](https://d0.awsstatic.com/whitepapers/Big_Data_Analytics_Options_on_AWS.pdf)
 
 
 
