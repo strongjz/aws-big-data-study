@@ -11,24 +11,25 @@
   * Durable and Elastic
   
   * FIFO:
-    * KPL - kinesis producer library
+    * KPL - Kinesis producer library
         * Adds a delay of RecordMaxBufferedTime. HIgher increases throughput but increases latency.
         * Batching
             * Aggregation: combines user records into a single streams record to increase efficiency of shards
             * Collection: batches groups of stream records to reduce http calls
-    
-    
-    * KCL - kinesis client library
+            
+    * KCL - Kinesis client library
         * Consumes and processes kinesis data
         * Handles load balancing, etc
         * Java, node, .net, python or ruby
         * Can de-aggregate records aggregated by the KPL
         * Uses dynamo to track state
             * 10 read / 10 write capacity by default
+            
     * Kinesis Agent
         * Java app
         * Can monitor and write to multiple streams and directories
         * Can convert logs prior to sending to kinesis
+        
     * Kinesis REST API
         * OutRecords: will return 200 even if some records fail in the request, you can use PutRecordsResult to check for individual failures.
   
