@@ -105,7 +105,26 @@ HDFS capacity calculation: total storage / replication factor = hdfs capacity
    
 ##### Security
 
-Security groups - you can use your own to isolate EMR clusters. Can also add additional groups to allow ssh, etc. 
+* IAM policies - allow or deny permissions for IAM users and groups to perform actions. Policies can be combined with 
+tagging to control access on a cluster-by-cluster basis.
+
+* IAM roles for EMRFS requests to Amazon S3 - You can control whether cluster users can access files from within 
+Amazon EMR based on user, group, or the location of EMRFS data in Amazon S3.
+
+* IAM roles - The Amazon EMR service role, instance profile, and service-linked role control how Amazon EMR is able to access other 
+AWS services. For more information, see Configure IAM Roles for Amazon EMR Permissions to AWS Services.
+
+* Kerberos - You can set up Kerberos to provide strong authentication through secret-key cryptography. 
+
+* SSH - provides a secure way for users to connect to the command line on cluster instances. 
+It also provides tunneling to view web interfaces that applications host on the master node. Clients can authenticate 
+using Kerberos or an Amazon EC2 key pair.
+
+* Data encryption - You can implement data encryption to help protect data at rest in Amazon S3 and in cluster 
+instance storage, and data in transit. For more information, see Encrypt Data in Transit and At Rest. You can also 
+use a custom Amazon Linux AMI to encrypt the EBS root device volume of cluster instances.
+
+* Security groups - you can use your own to isolate EMR clusters. Can also add additional groups to allow ssh, etc. 
 IAM Roles - can use custom roles
 
 
@@ -318,75 +337,9 @@ Tools to access Hive metastore tables.
 Managed ETL (spark) service to categorize, clean and enrich data. Can move between data stores, can be used 
 as the metadata catalog. Serverless. Can discover and correlate data across multiple datastores. 
 
+### Blogs
 
-### Blogs 
-
-### Docs
-
-https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-overview.html#emr-overview-clusters 
-
-https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-file-systems.html 
-
-https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-consistent-view.html 
-
-https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-encryption-enable.html#emr-awskms-keys 
-
-https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-data-encryption-options.html 
-
-https://docs.aws.amazon.com/emr/latest/ManagementGuide/emrfs-configure-sqs-cw.html 
-
-https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-hive.html 
-
-https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-flink.html 
-
-https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-tez.html 
-
-https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-hbase.html 
-
-https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-hcatalog.html 
-
-https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-zookeeper.html 
-
-https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-phoenix.html 
-
-https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-sqoop.html 
-
-https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-presto.html 
-
-https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-jupyter-emr-managed-notebooks.html 
-
-https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-jupyterhub.html
-
-
-
-### Code
-
-Web interfaces hosted on EMR 
-
-https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-web-interfaces.html
-
-
-|Name of interface	    | URI                                       |
-|:----------------------|:------------------------------------------|
-| YARN ResourceManager	| http://master-public-dns-name:8088/       |
-| YARN NodeManager	    | http://coretask-public-dns-name:8042/     |
-| Hadoop HDFS NameNode	| http://master-public-dns-name:50070/      |
-| Hadoop HDFS DataNode	| http://coretask-public-dns-name:50075/    |
-| Spark HistoryServer	| http://master-public-dns-name:18080/      |
-| Zeppelin		        | http://master-public-dns-name:8890/       |
-| Hue	                | http://master-public-dns-name:8888/       |
-| Ganglia		        | http://master-public-dns-name/ganglia/    |
-| HBase	                | http://master-public-dns-name:16010/      |
-| JupyterHub		    | https://master-public-dns-name:9443/      |
-
-
-Docs
-
-* [Access Hbase tables with Hive](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-hbase-access-hive.html)
-
-* [Configuring Hue for LDAP](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/hue-ldap.html)
-
-Blogs
+[Tagged Articles for EMR](https://aws.amazon.com/articles/?tag=articles%23keywords%23elastic-mapreduce)
 
 https://aws.amazon.com/blogs/big-data/combine-nosql-and-massively-parallel-analytics-using-apache-hbase-and-apache-hive-on-amazon-emr/
 
@@ -403,9 +356,47 @@ https://aws.amazon.com/blogs/big-data/using-spark-sql-for-etl/
 https://aws.amazon.com/blogs/compute/ad-hoc-big-data-processing-made-simple-with-serverless-mapreduce/
 
 
+### Docs
+
+* [EMR Releases and Components](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-components.html)
+
+* [Access Hbase tables with Hive](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-hbase-access-hive.html)
+
+* [Configuring Hue for LDAP](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/hue-ldap.html)
+
+
+https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-overview.html#emr-overview-clusters 
+
+https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-file-systems.html 
+
+https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-consistent-view.html 
+
+https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-encryption-enable.html#emr-awskms-keys 
+
+https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-data-encryption-options.html 
+
+https://docs.aws.amazon.com/emr/latest/ManagementGuide/emrfs-configure-sqs-cw.html 
+
+### Code
+
+[Web interfaces hosted on EMR](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-web-interfaces.html)
+
+|Name of interface	    | URI                                       |
+|:----------------------|:------------------------------------------|
+| YARN ResourceManager	| http://master-public-dns-name:8088/       |
+| YARN NodeManager	    | http://coretask-public-dns-name:8042/     |
+| Hadoop HDFS NameNode	| http://master-public-dns-name:50070/      |
+| Hadoop HDFS DataNode	| http://coretask-public-dns-name:50075/    |
+| Spark HistoryServer	| http://master-public-dns-name:18080/      |
+| Zeppelin		        | http://master-public-dns-name:8890/       |
+| Hue	                | http://master-public-dns-name:8888/       |
+| Ganglia		        | http://master-public-dns-name/ganglia/    |
+| HBase	                | http://master-public-dns-name:16010/      |
+| JupyterHub		    | https://master-public-dns-name:9443/      |
+
+
 AWS Labs
 
-https://github.com/awslabs/emr-dynamodb-connector
-
+[EMR DynamoDB connector](https://github.com/awslabs/emr-dynamodb-connector)
 
 [Redshift Data Source for Apache Spark](https://github.com/databricks/spark-redshift)
